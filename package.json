@@ -1,0 +1,24 @@
+{
+  "name": "webauth-i-challenge",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/brellin/webauth-i-challenge.git",
+  "author": "Will Umstead <william.c.umstead@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js",
+    "server": "nodemon index.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^8.0.0",
+    "express": "^4.16.4",
+    "helmet": "^3.18.0",
+    "knex": "^0.16.5",
+    "morgan": "^1.9.1",
+    "sqlite3": "^4.0.6"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.0"
+  }
+}
