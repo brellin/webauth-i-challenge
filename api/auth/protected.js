@@ -1,4 +1,4 @@
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs')
 const Users = require('../../db/helpers')
 
 module.exports = (
