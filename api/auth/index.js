@@ -48,25 +48,26 @@ router.post('/login', async (req, res) => {
 
         try {
 
-            await
-                Users.find(username).then(user => {
+            await Users.find(username).then(user => {
 
-                    if (user && bcrypt.compareSync(password, user.password)) {
+                if (user && bcrypt.compareSync(password, user.password)) {
 
-                        res.status(200).json({
+                    req.session.username = user.username
 
-                            message: 'You have successfully been logged in!'
+                    res.status(200).json({
 
-                        })
+                        message: 'You have successfully been logged in!'
 
-                    } else {
-                        res.status(401).json({
+                    })
 
-                            message: 'Invalid Credentials'
+                } else {
+                    res.status(401).json({
 
-                        })
-                    }
-                })
+                        message: 'Invalid Credentials'
+
+                    })
+                }
+            })
 
         } catch (err) {
 
@@ -103,6 +104,29 @@ router.get('/users', protected, async (req, res) => {
 
         res.status(500).json(err)
 
+    }
+
+})
+
+router.get('/logout', async (req, res) => {
+
+    if (req.session) {
+        req.session.destroy(err => {
+            if (err) {
+                console.log(err)
+                res.status(500).json({
+                    error: 'Something went wrong.'
+                })
+            } else {
+                res.status(200).json({
+                    message: "You're logged out now."
+                })
+            }
+        })
+    } else {
+        res.status(400).json({
+            message: "You're not logged in."
+        })
     }
 
 })
